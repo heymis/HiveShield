@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration status="ERROR">
+	<Properties>
+		<Property name="logFileName">all.log</Property>
+		<Property name="logPath">logs</Property>
+		<!-- <Property name="logPathArchive">${logPath}/archive</Property> -->
+		<Property name="logPathArchive">${logPath}</Property>
+	</Properties>
+
+	<loggers>
+		<Root level="ERROR" additivity="true">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="rollingFile" />
+		</Root>
+
+		<Logger name="org.springframework" level="WARN" />
+		
+		<Logger name="com.heymis.hiveshield" level="TRACE" />
+
+		<Logger name="web" level="TRACE" />
+		<Logger name="config" level="TRACE" />
+
+	</loggers>
+
+	<appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY" />
+			<!-- <PatternLayout pattern="%d{yyyy-MM-dd|HH:mm:ss}|%-5p|%c|%m%n" /> -->
+			<PatternLayout pattern="%d{yyyy-MM-dd|HH:mm:ss}|%-5p|%c{1}|%m%n" />
+		</Console>
+
+		<!-- <RollingFile name="rollingFile" fileName="${logPath}/${logFileName}"
+			filePattern="${logPathArchive}/$${date:yyyy-MM}/%d{yyyy-MM-dd}_%i.log.gz"> -->
+		<RollingFile name="rollingFile" fileName="${logPath}/${logFileName}"
+			filePattern="${logPathArchive}/%d{yyyy-MM-dd}_%i.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd|HH:mm:ss}|%-5p|%c{1}|%m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy modulate="true" interval="1" />
+				<SizeBasedTriggeringPolicy size="20MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+		</RollingFile>
+
+	</appenders>
+</configuration>

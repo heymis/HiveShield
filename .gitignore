@@ -1,6 +1,7 @@
 /private/
 /modules/**/bin/
 /bin/
+/logs/
 /target/
 /.classpath
 /.project
