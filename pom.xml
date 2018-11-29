@@ -14,6 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.8</jdk.version>
 		<spring.framework.version>5.1.0.RELEASE</spring.framework.version>
+		<aspectj.version>1.9.2</aspectj.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<log4j.version>2.11.1</log4j.version>
 		<junit.version>4.12</junit.version>
@@ -21,6 +22,18 @@
 
 	<dependencyManagement>
 		<dependencies>
+		
+			<!-- Aspect -->
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
 
 			<!-- Spring -->
 			<dependency>
@@ -82,7 +95,7 @@
 
 	<modules>
 		<module>modules/hiveshield-core</module>
-		<module>modules/hiveshield-app-test</module>
+		<module>modules/hiveshield-spring</module>
 	</modules>
 
 	<build>

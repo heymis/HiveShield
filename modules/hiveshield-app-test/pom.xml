@@ -16,9 +16,15 @@
 	</parent>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>com.heymis.hiveshield</groupId>
 			<artifactId>hiveshield-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.heymis.hiveshield</groupId>
+			<artifactId>hiveshield-spring</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

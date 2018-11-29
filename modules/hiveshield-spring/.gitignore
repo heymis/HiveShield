@@ -1,0 +1,9 @@
+/private/
+/bin/
+/logs/
+/target/
+/.classpath
+/.project
+/.settings/
+/.DS_Store/
+/.vscode/
