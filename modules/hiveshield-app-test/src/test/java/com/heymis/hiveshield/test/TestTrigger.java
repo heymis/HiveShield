@@ -13,6 +13,10 @@
  ******************************************************************************/
 package com.heymis.hiveshield.test;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import org.junit.After;
@@ -26,6 +30,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.heymis.hiveshield.core.UserSession;
+import com.heymis.hiveshield.test.docs.hello.Hello;
 import com.heymis.hiveshield.test.docs.hello.impl.BaseHello;
 import com.heymis.hiveshield.test.facade.HelloFacade;
 
@@ -53,12 +58,21 @@ public class TestTrigger {
 	private HelloFacade facade;
 
 	@Test
-	public void test() {
+	public void test01create() {
 		BaseHello hello = new BaseHello();
 		hello.setBusinessKey("com.example.docs");
 		hello.setApplicationId("hello");
 		hello.setUuid(UUID.randomUUID().toString());
 		facade.create(hello);
+	}
+	
+	@Test
+	public void test02query() {
+		Map<String, Object> restrictions = new TreeMap<String, Object>();
+		restrictions.put("applicationId", "hello");
+		Map<String, Boolean> order = new LinkedHashMap<String, Boolean>();
+		order.put("applicationId", true);
+		List<Hello> hellos = facade.query(restrictions, order);
 	}
 
 }

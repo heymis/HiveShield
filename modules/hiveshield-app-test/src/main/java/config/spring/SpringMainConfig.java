@@ -23,20 +23,21 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import config.spring.project.ProjectBeans;
+import config.spring.project.SecurityBeans;
 
 /**
  * @author Oliver Ou
  */
 @Configuration
 @PropertySource(value = { "classpath:application.properties" }, encoding = "UTF-8")
-@ComponentScan(basePackages = {
+@ComponentScan(lazyInit=true, basePackages = {
 		//
 		"com.heymis.hiveshield.test" //
 })
 @ImportResource({})
 @Import({
-		//
-		ProjectBeans.class //
+		SecurityBeans.class //
+		, ProjectBeans.class //
 })
 public class SpringMainConfig {
 
@@ -44,5 +45,4 @@ public class SpringMainConfig {
 	public static PropertyResourceConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
-
 }

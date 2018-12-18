@@ -13,6 +13,11 @@
  ******************************************************************************/
 package com.heymis.hiveshield.test.docs.hello.impl;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -29,12 +34,12 @@ import com.heymis.hiveshield.test.docs.hello.HelloService;
 public class BaseHelloService implements HelloService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	
+
 	@PostConstruct
 	public void init() {
 		log.debug("init|hashCode={}", this.hashCode());
 	}
-	
+
 	@PreDestroy
 	public void destroy() {
 		log.debug("init|hashCode={}", this.hashCode());
@@ -45,6 +50,28 @@ public class BaseHelloService implements HelloService {
 		String userId = UserSession.getUserId();
 		log.debug("Create hello|sessionId={}|userId={}|hello={}", sessionId, userId, hello);
 		return hello;
+	}
+
+	public List<Hello> query(Map<String, Object> restrictions, Map<String, Boolean> order) {
+		String sessionId = UserSession.getSessionId();
+		String userId = UserSession.getUserId();
+		log.debug("Query hello|sessionId={}|userId={}|restrictions={}", sessionId, userId, restrictions);
+
+		List<Hello> results = new LinkedList<Hello>();
+
+		BaseHello hello1 = new BaseHello();
+		hello1.setBusinessKey("com.example.docs");
+		hello1.setApplicationId("hello");
+		hello1.setUuid(UUID.randomUUID().toString());
+		results.add(hello1);
+
+		BaseHello hello2 = new BaseHello();
+		hello2.setBusinessKey("com.example.docs");
+		hello2.setApplicationId("hello");
+		hello2.setUuid(UUID.randomUUID().toString());
+		results.add(hello2);
+
+		return results;
 	}
 
 }

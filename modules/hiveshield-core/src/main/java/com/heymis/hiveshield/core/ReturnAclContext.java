@@ -11,18 +11,25 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  ******************************************************************************/
-package com.heymis.hiveshield.test.docs.hello;
-
-import java.util.List;
-import java.util.Map;
+package com.heymis.hiveshield.core;
 
 /**
+ * Return ACL Context
+ * 
  * @author Oliver Ou
  */
-public interface HelloService {
+public interface ReturnAclContext {
+	
+	public AclContext getAclContext();
 
-	public Hello create(Hello hello);
+	public void setAclContext(AclContext aclContext);
 
-	public List<Hello> query(Map<String, Object> restrictions, Map<String, Boolean> order);
+	public Class<?> getReturnType();
 
+	public void setReturnType(Class<?> returnType);
+
+	public Object getReturnValue();
+
+	public void setReturnValue(Object returnValue);
+	
 }

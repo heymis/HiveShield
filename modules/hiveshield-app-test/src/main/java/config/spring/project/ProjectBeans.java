@@ -16,6 +16,8 @@ package config.spring.project;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.heymis.hiveshield.core.Constants;
+import com.heymis.hiveshield.test.acl.MyApprovalRunner;
 import com.heymis.hiveshield.test.docs.hello.HelloService;
 import com.heymis.hiveshield.test.docs.hello.impl.BaseHelloService;
 
@@ -30,6 +32,18 @@ public class ProjectBeans {
 		BaseHelloService service = new BaseHelloService();
 		return service;
 	}
+	
+	@Bean(Constants.DEFAULT_APPROVAL_RUNNER_BEAN_NAME)
+	public MyApprovalRunner myFirstApprovalRunner() {
+		MyApprovalRunner service = new MyApprovalRunner();
+		return service;
+	}
+	
+//	@Bean(Constants.DEFAULT_APPROVAL_RUNNER_BEAN_NAME)
+//	public MyApprovalRunnerCustomizedAC myFirstApprovalRunner() {
+//		MyApprovalRunnerCustomizedAC service = new MyApprovalRunnerCustomizedAC();
+//		return service;
+//	}
 	
 
 }

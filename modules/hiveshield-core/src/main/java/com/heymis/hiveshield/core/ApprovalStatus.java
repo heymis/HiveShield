@@ -11,18 +11,41 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  ******************************************************************************/
-package com.heymis.hiveshield.test.docs.hello;
-
-import java.util.List;
-import java.util.Map;
+package com.heymis.hiveshield.core;
 
 /**
+ * Approval Status
+ * 
  * @author Oliver Ou
  */
-public interface HelloService {
+public enum ApprovalStatus {
 
-	public Hello create(Hello hello);
+	/**
+	 * Mark this approval context can be passed to the next runner .
+	 */
+	CONTINUABLE(true),
 
-	public List<Hello> query(Map<String, Object> restrictions, Map<String, Boolean> order);
+	/**
+	 * Mark this approval context is finished, <strong>DO NOT PASS</strong> it to the next runner.
+	 */
+	FINISHED(false);
+
+	private final boolean continuable;
+
+	private ApprovalStatus(boolean continuable) {
+		this.continuable = continuable;
+	}
+
+	public static ApprovalStatus continueIf(boolean continuable) {
+		return continuable ? CONTINUABLE : FINISHED;
+	}
+
+	public boolean isContinuable() {
+		return this == CONTINUABLE;
+	}
+
+	public ApprovalStatus and(boolean value) {
+		return value && continuable ? CONTINUABLE : FINISHED;
+	}
 
 }

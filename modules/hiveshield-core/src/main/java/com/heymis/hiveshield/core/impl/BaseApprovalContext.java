@@ -11,18 +11,31 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  ******************************************************************************/
-package com.heymis.hiveshield.test.docs.hello;
+package com.heymis.hiveshield.core.impl;
 
-import java.util.List;
-import java.util.Map;
+import com.heymis.hiveshield.core.ApprovalContext;
+import com.heymis.hiveshield.core.ApprovalStatus;
 
 /**
+ * Simple Approval Context
+ * 
  * @author Oliver Ou
  */
-public interface HelloService {
+public class BaseApprovalContext implements ApprovalContext {
 
-	public Hello create(Hello hello);
+	private ApprovalStatus approvalStatus;
 
-	public List<Hello> query(Map<String, Object> restrictions, Map<String, Boolean> order);
+	public ApprovalStatus getApprovalStatus() {
+		return approvalStatus;
+	}
+
+	public void setApprovalStatus(ApprovalStatus approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "BaseApprovalContext [approvalStatus=" + approvalStatus + "]";
+	}
 
 }

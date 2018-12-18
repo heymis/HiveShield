@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.heymis.hiveshield</groupId>
 	<artifactId>hiveshield-root</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<packaging>pom</packaging>
 	<name>HiveShield</name>
 	<description>A tiny security framework</description>
@@ -137,7 +137,6 @@
 					<configuration>
 						<archive>
 							<manifest>
-								<addDefaultImplementationEntries />
 								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 							</manifest>
 						</archive>
@@ -164,6 +163,11 @@
 						<useReleaseProfile>false</useReleaseProfile>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.8.2</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -173,12 +177,14 @@
 			<id>distro</id>
 			<modules>
 				<module>modules/hiveshield-core</module>
+				<module>modules/hiveshield-spring</module>
 			</modules>
 		</profile>
 		<profile>
 			<id>deploy</id>
 			<modules>
 				<module>modules/hiveshield-core</module>
+				<module>modules/hiveshield-spring</module>
 			</modules>
 			<build>
 				<plugins>

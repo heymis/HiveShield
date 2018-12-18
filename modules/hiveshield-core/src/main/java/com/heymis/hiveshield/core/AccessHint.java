@@ -11,18 +11,33 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  ******************************************************************************/
-package com.heymis.hiveshield.test.docs.hello;
-
-import java.util.List;
-import java.util.Map;
+package com.heymis.hiveshield.core;
 
 /**
+ * A hint of handling accesses for runner
+ * 
  * @author Oliver Ou
  */
-public interface HelloService {
+public enum AccessHint {
 
-	public Hello create(Hello hello);
+	/**
+	 * All of accesses are necessary for approving
+	 */
+	UNION("UNION"),
 
-	public List<Hello> query(Map<String, Object> restrictions, Map<String, Boolean> order);
+	/**
+	 * Using customize rule for approving
+	 */
+	CUSTOM("CUSTOM");
+
+	private String hint;
+
+	private AccessHint(String hint) {
+		this.hint = hint;
+	}
+
+	public String toString() {
+		return this.hint;
+	}
 
 }

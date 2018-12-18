@@ -13,6 +13,9 @@
  ******************************************************************************/
 package com.heymis.hiveshield.test.facade;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -21,7 +24,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.heymis.hiveshield.core.Constants;
 import com.heymis.hiveshield.core.UserSession;
+import com.heymis.hiveshield.core.annotation.ArrivalAcl;
+import com.heymis.hiveshield.core.annotation.DepartureAcl;
 import com.heymis.hiveshield.test.docs.hello.Hello;
 import com.heymis.hiveshield.test.docs.hello.HelloService;
 
@@ -30,14 +36,14 @@ import com.heymis.hiveshield.test.docs.hello.HelloService;
  */
 @Component
 public class HelloFacade {
-	
-private final Logger log = LoggerFactory.getLogger(this.getClass());
-	
+
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
+
 	@PostConstruct
 	public void init() {
 		log.debug("init|hashCode={}", this.hashCode());
 	}
-	
+
 	@PreDestroy
 	public void destroy() {
 		log.debug("init|hashCode={}", this.hashCode());
@@ -46,11 +52,20 @@ private final Logger log = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private HelloService service;
 
+	@ArrivalAcl(aId = "hello", accesses = { Constants.ACCESS_READ })
 	public Hello create(Hello hello) {
 		String sessionId = UserSession.getSessionId();
 		String userId = UserSession.getUserId();
 		log.debug("Create hello|sessionId={}|userId={}|hello={}", sessionId, userId, hello);
 		return service.create(hello);
+	}
+
+	@DepartureAcl(aId = "hello", accesses = { Constants.ACCESS_READ })
+	public List<Hello> query(Map<String, Object> restrictions, Map<String, Boolean> order) {
+		String sessionId = UserSession.getSessionId();
+		String userId = UserSession.getUserId();
+		log.debug("Query hello|sessionId={}|userId={}|restrictions={}", sessionId, userId, restrictions);
+		return service.query(restrictions, order);
 	}
 
 }

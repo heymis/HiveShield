@@ -11,18 +11,30 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  ******************************************************************************/
-package com.heymis.hiveshield.test.docs.hello;
-
-import java.util.List;
-import java.util.Map;
+package com.heymis.hiveshield.core;
 
 /**
+ * Authority Service
+ * 
  * @author Oliver Ou
  */
-public interface HelloService {
+public interface AuthorityService {
 
-	public Hello create(Hello hello);
+	/**
+	 * Convert arrival information to {@linkplain AclContext}.
+	 * 
+	 * @param aclContext ACL Context
+	 * @throws ApprovalException In case of error
+	 * @see AclContext
+	 */
+	public void checkArrival(AclContext aclContext) throws HiveshieldException;
 
-	public List<Hello> query(Map<String, Object> restrictions, Map<String, Boolean> order);
+	/**
+	 * Convert departure information to {@linkplain ReturnAclContext}.
+	 * 
+	 * @param returnAclContext Return ACL Context
+	 * @throws ApprovalException In case of error
+	 */
+	public void checkDeparture(ReturnAclContext returnAclContext) throws HiveshieldException;
 
 }

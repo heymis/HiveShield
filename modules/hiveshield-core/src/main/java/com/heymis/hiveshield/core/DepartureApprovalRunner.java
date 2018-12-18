@@ -11,18 +11,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  ******************************************************************************/
-package com.heymis.hiveshield.test.docs.hello;
-
-import java.util.List;
-import java.util.Map;
+package com.heymis.hiveshield.core;
 
 /**
+ * Departure Approval Runner
+ * 
+ * @param <C> Type of customized approval Context
  * @author Oliver Ou
  */
-public interface HelloService {
+public interface DepartureApprovalRunner<C extends ApprovalContext> {
 
-	public Hello create(Hello hello);
-
-	public List<Hello> query(Map<String, Object> restrictions, Map<String, Boolean> order);
+	/**
+	 * Inspect departure approval
+	 * 
+	 * @param returnAclContext Return ACL context for providing approval information
+	 * @return Customized approval Context; never null
+	 * @throws ApprovalException Access denied
+	 */
+	public C inspectDeparture(ReturnAclContext returnAclContext) throws ApprovalException;
 
 }
